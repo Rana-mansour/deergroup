@@ -91,3 +91,5 @@ for i in range(len(asym_list)):
     zlist.append(tempL)
     print('The data type of {} is {}'.format(asym_list[i][j],r))
     
+## Ecercise 4
+## Just playing around lalala
