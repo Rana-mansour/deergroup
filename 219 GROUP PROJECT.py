@@ -67,3 +67,31 @@ print('-------------------------')
 print("total wrong values in prosity :   ",wrong_values_prosity)
 print("total wrong values in permeability  :   ",wrong_values_permeability)
 print("total wrong values in facies  :   ",wrong_values_facies)
+
+import numpy as np
+d = poro_perm_data.replace(0, np.nan)
+d = poro_perm_data.dropna(how = 'all', axis = 0)
+d = poro_perm_data.replace(np.nan, 0)
+
+#deletes all the values below zero in porosity csv file
+poro_perm_data = poro_perm_data[poro_perm_data['Porosity (%)'] > 0]
+
+#deletes all the values below zero in permeability csv file
+poro_perm_data = poro_perm_data[poro_perm_data['Permeability (mD)'] > 0]
+#now the data is clean from nan, negative, and zero values: check:
+poro_perm_data.describe()
+#to check for each facies again:
+
+bool_las = poro_perm_data.loc[:,"Facies"] == "'overbanks'"
+newOdata= poro_perm_data[bool_las]
+newOdata.describe()
+
+bool_las2 = poro_perm_data.loc[:,"Facies"] == "'crevasse splay'"
+newCdata= poro_perm_data[bool_las2]
+newCdata.describe()
+
+bool_las3 = poro_perm_data.loc[:,"Facies"] == "'channel'"
+newCHdata= poro_perm_data[bool_las3]
+newCHdata.describe()
+#now min and max of each facies is identified
+
