@@ -15,4 +15,9 @@ poro_perm_data.columns # shows column labels as series
 #for null values
 poro_perm_data.dropna(axis = 0, inplace = True)
 poro_perm_data.isnull().sum() #after cleaning Facies null values 
-    
+
+import matplotlib.pyplot as plt
+fig1 = poro_perm_data.plot(x='Depth (ft)', y='Porosity (%)',kind = 'scatter',xlabel = 'Depth (ft)', ylabel = 'porosity(%)', color='black', title= 'Depth Vs. Porosity')
+plt.legend(['Depth (ft)','Porosity (%)'])
+fig2 = poro_perm_data.plot(x='Depth (ft)', y='Permeability (mD)',kind = 'scatter',xlabel = 'Depth (ft)', ylabel = 'permeability (mD)', color='black', title= 'Depth Vs. Permeability')
+plt.legend(['Depth (ft)','Permeability (mD)'])
