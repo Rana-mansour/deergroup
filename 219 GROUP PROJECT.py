@@ -116,3 +116,49 @@ plt.legend(['Depth (ft)','Porosity (%)'])
 fig8 = poro_perm_data.plot(x='Depth (ft)', y='Permeability (mD)',kind = 'scatter',xlabel = 'Depth (ft)', ylabel = 'Permeability (mD)', color='black', title= 'overbanks facies permeability graph')
 plt.legend(['Depth (ft)','Permeability (mD)'])
 
+#STEP 2: install las and clean data
+f = open('1051661071.las', 'r') # 'r' = read
+lines = f.read()
+
+#f and lines are the las file
+las = lasio.read('1051661071.las')
+df = las.df()
+summary = df.describe()
+df.isnull().sum()
+
+df = df.reset_index()
+df = df.rename(columns = {'DEPT' : 'DEPTH'})
+
+# 100000, negative values are deleted from the data
+import numpy as np
+df = df.replace(0, np.nan)
+df = df.dropna(how = 'all', axis = 0)
+df = df.replace(np.nan, 0)
+df = df.drop(columns = 'AVTX')
+df = df.drop(columns = 'BVTX')
+df = df.drop(columns = 'LSPD')
+df = df.drop(columns = 'SP')
+
+df = df[df['CILD'] > 0]
+df = df[df['CNDL'] > 0]
+df = df[df['CNLS'] > 0]
+df = df[df['CNPOR'] > 0]
+df = df[df['CNSS'] > 0]
+df = df[df['GR'] > 0]
+df = df[df['LTEN'] > 0]
+df = df[df['RILD'] != 100000]
+df = df[df['RILM'] > 0]
+df = df[df['RLL3'] > 0]
+df = df[df['RXORT'] > 0]
+df = df[df['MCAL'] > 0]
+df = df[df['MI'] > 0]
+df = df[df['MN'] > 0]
+df = df[df['DCAL'] > 0]
+df = df[df['RHOB'] > 0]
+df = df[df['RHOC'] > 0]
+df = df[df['DPOR'] > 0]
+
+summary2 = df.describe()
+
+#to check original file
+df1= las.df()
