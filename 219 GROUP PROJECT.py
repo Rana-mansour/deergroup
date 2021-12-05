@@ -15,4 +15,11 @@ poro_perm_data.columns # shows column labels as series
 #for null values
 poro_perm_data.dropna(axis = 0, inplace = True)
 poro_perm_data.isnull().sum() #after cleaning Facies null values 
+
+#identify null value by true, and by table
+bool1 = poro_perm_data.loc[:,"Facies"].isnull()
+null_preveious_rank = poro_perm_data.loc[bool1]
+null_preveious_rank
+
+poro_perm_data.describe()
     
