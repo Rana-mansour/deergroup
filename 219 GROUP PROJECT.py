@@ -21,3 +21,10 @@ fig1 = poro_perm_data.plot(x='Depth (ft)', y='Porosity (%)',kind = 'scatter',xla
 plt.legend(['Depth (ft)','Porosity (%)'])
 fig2 = poro_perm_data.plot(x='Depth (ft)', y='Permeability (mD)',kind = 'scatter',xlabel = 'Depth (ft)', ylabel = 'permeability (mD)', color='black', title= 'Depth Vs. Permeability')
 plt.legend(['Depth (ft)','Permeability (mD)'])
+
+#identify null value by true, and by table
+bool1 = poro_perm_data.loc[:,"Facies"].isnull()
+null_preveious_rank = poro_perm_data.loc[bool1]
+null_preveious_rank
+
+poro_perm_data.describe()
