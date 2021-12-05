@@ -28,3 +28,42 @@ null_preveious_rank = poro_perm_data.loc[bool1]
 null_preveious_rank
 
 poro_perm_data.describe()
+
+import itertools
+wrong_values_prosity = 0  # counter for wrong values in prosity
+wrong_values_permeability = 0 # counter for wrong values in permeability
+wrong_values_facies = 0  # counter for wrong values in facies
+peorosity = []
+permability = []
+depth = []
+Facies = []
+
+aa = []
+for i in reader:
+    
+    i[1] = float(i[1])
+    i[2] = float(i[2])
+    
+        
+    if i[1]<0 :
+        i[1] = "incorrect value"
+        wrong_values_prosity+=1
+    if i[1] != str(i[1]):
+        peorosity.append(i[1])
+    if i[1] != "incorrect value":
+        depth.append(float(i[0]))    
+        
+    if i[2]<=0 :
+        i[2] = "incorrect value"
+        wrong_values_permeability+=1
+    if i[2] != str(i[2]):
+        permability.append(i[2])    
+    i[0] = float(i[0])
+    if i[3] == 'nan':
+        i[3] = "incorrect facies"
+        wrong_values_facies+=1
+    
+print('-------------------------')  
+print("total wrong values in prosity :   ",wrong_values_prosity)
+print("total wrong values in permeability  :   ",wrong_values_permeability)
+print("total wrong values in facies  :   ",wrong_values_facies)
